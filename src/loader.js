@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get locations for J and B
   const jRect = jb[0].getBoundingClientRect();
   const bRect = jb[1].getBoundingClientRect();
-  const distanceX = bRect.left - jRect.left - 18;
+  const distanceX = bRect.left - jRect.left - (jRect.width);
 
   gsap.set(jb[0], {
     x: `${distanceX}px`,
@@ -127,10 +127,28 @@ document.addEventListener("DOMContentLoaded", () => {
     '<=+0.6'
   );
 
-  //  V1 simple character animation
-  tl.from('.hero_heading .char', {
-    yPercent: 100
-  }, ">-=1.7")
+  // //  V1 simple character animation
+  // tl.from('.hero_heading .char', {
+  //   yPercent: 100
+  // }, ">-=1.7")
+
+  let lines = document.querySelectorAll('.hero_heading .line');
+  let linesTl = gsap.timeline()
+  lines.forEach((e, i) => {
+    let chars = e.querySelectorAll('.char')
+
+    let delay = i === 0 ? '<+=1.4' : "<"
+
+    console.log(e);
+    console.log(chars);
+
+    tl.from(chars, {
+      yPercent: 100,
+      stagger: 0.008,
+      delay: 0.004 * i,
+    }, delay)
+  })
+  tl.add(linesTl)
 
 
 
@@ -138,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opacity: 0,
     y: 20,
     stagger: 0.1
-  }, "<+=0.4")
+  }, "<-=1.5")
 
   tl.from('.g_tag_wrap', {
     opacity: 0,
@@ -146,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
   tl.to('.loader_wrap', {
     autoAlpha: 0
   })
-
 
 
 

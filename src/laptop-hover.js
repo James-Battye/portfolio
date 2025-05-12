@@ -1,12 +1,6 @@
 
 let cardsToHover = document.querySelectorAll('.work_item');
 
-// gsap.set('.work_image_wrap', {
-//   maxHeight: function (self) {
-//     return this.targets()[0].getBoundingClientRect().height
-//   }
-// })
-
 cardsToHover.forEach((e) => {
   e.addEventListener('mouseenter', () => {
     hoverIn(e)
